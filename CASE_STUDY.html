@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng kí học viên</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<style>
+    small {
+        font-size: 12px;
+    }
+
+    body {
+        font-size: 15px;
+    }
+</style>
+<body>
+    <form action="Dang_ki_hoc_vien.html" method="GET">
+        <table>
+            <tr>
+                <td>
+                    <table style=" background-color:dimgrey; width: 120%" border="1">
+                        <tr>
+                            <th style="text-align: center; background-color: darkslategray" ; colspan="3">
+                                <p style="color: white;">
+                                    ĐĂNG KÍ HỌC VIÊN
+                                </p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Name" style="color: whitesmoke;">Họ và tên</label>
+                                <br>
+                                <small></small>
+                            </td>
+                            <td>
+                                <input type="text" name="Name" id="Name" size="25" placeholder="Nhập họ và tên của bạn"
+                                    style="width: 90%;">
+                                <br>
+                                <small id="ycTen" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: whitesmoke;">
+                                <label for="BirthDay">Ngày sinh</label>
+                                <small></small>
+                            </td>
+                            <td>
+                                <select name="" id="ngay" class="btn btn-sm"></select>
+                                <select name="" id="thang" class="btn btn-sm"></select>
+                                <select name="" id="nam" class="btn btn-sm"></select>
+                                <br>
+                                <small id="ntnsinh" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: whitesmoke;">
+                                <label for="Nam">Giới tính</label>
+                                <br>
+                                <small></small>
+                            </td>
+                            <td>
+                                <input type="radio" name="Nam" id="Nam" value="Nam"> <label for="Nam">Nam</label>
+                                <input type="radio" name="Nam" id="Nữ" value="Nữ"> <label for="Nữ">Nữ</label>
+                                <br>
+                                <small id="ycGT" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: whitesmoke; vertical-align: top;">
+                                <label for="Add">Địa chỉ</label>
+                            </td>
+                            <td>
+                                <textarea name="Add" id="Add" cols="30" rows="5" placeholder="Nhập địa chỉ của bạn"
+                                    style="width: 90%;"></textarea>
+                                <br>
+                                <small id="ycDC" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: whitesmoke;">
+                                <label for="Lop">Lớp</label>
+                                <small></small>
+                            </td>
+                            <td>
+                                <select name="Lop" id="Lop" class="btn btn-sm"></select>
+                                <br>
+                                <small id="ycLop" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: whitesmoke;">
+                                <label for="Mail">Email</label>
+                                <small></small>
+                            </td>
+                            <td>
+                                <input type="email" name="Mail" id="Mail" size="25" placeholder="Nhập email của bạn"
+                                    style="width: 90%;">
+                                <br>
+                                <small id="ycEmail" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: whitesmoke;">
+                                <label for="DT">Điện thoại</label>
+                                <small></small>
+                            </td>
+                            <td>
+                                <input type="tel" name="DT" id="DT" size="25" placeholder="Nhập số điện thoại của bạn"
+                                    style="width: 90%;">
+                                <br>
+                                <small id="ycSDT" style="color: salmon;"></small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="cnhat">
+                                <input type="button" name="Dang_ki" id="Dang_ki" value="Đăng kí"
+                                    onclick="dang_ky.nutDangKy();" class="btn btn-primary">
+                                <input type="reset" name="Nhap_lai" id="Nhap_lai" value="Nhập lại"
+                                    class="btn btn-danger">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="button" name="" id="DS" value="Danh sách học viên đã đăng ký"
+                                    style="text-align: center; width: 100%;" onclick="dang_ky.dsDangKy ()"
+                                    class="btn btn-warning">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="text-align: center; padding-left: 250px;">
+                    <p id="kq" style="color: blue;"></p>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        class Ngay_Thang_Nam_Lop {
+            constructor(id) {
+                this.id = id;
+            }
+            inNgay() {
+                document.getElementById(this.id).innerHTML += `<option value="Ngày">-Ngày-</option>`
+                for (var i = 1; i < 32; i++) {
+                    document.getElementById(this.id).innerHTML += `<option value="${i}">${i}</option>`;
+                }
+            }
+            inThang() {
+                document.getElementById(this.id).innerHTML += `<option value="Tháng">-Tháng-</option>`;
+                for (var y = 1; y < 13; y++) {
+                    document.getElementById(this.id).innerHTML += `<option value="${y}">Tháng ${y}</option>`;
+                }
+            }
+            inNam() {
+                document.getElementById(this.id).innerHTML += `<option value="Năm">-Năm-</option>`;
+                for (var j = 1970; j != 2004; j++) {
+                    document.getElementById(this.id).innerHTML += `<option value="${j}">${j}</option>`;
+
+                }
+            }
+            inLop() {
+                document.getElementById(this.id).innerHTML += `<option value="Lớp">-Lớp-</option>`;
+                for (var k = 1; k < 10; k++) {
+                    document.getElementById(this.id).innerHTML += `<option value="Lớp 0${k}">Lớp 0${k}</option>`;
+                }
+            }
+        }
+        class Dang_Ky {
+            ttHoc_vien = [];
+            danh_sach = [];
+            ntnSinh = [];
+            id = 0;
+            dsTimkiem = [];
+            nutDangKy() {
+                var ngaysinh = document.getElementById('ngay').value;
+                var thangsinh = document.getElementById('thang').value;
+                var namsinh = document.getElementById('nam').value;
+                if (ngaysinh == 'Ngày' && thangsinh == 'Tháng' && namsinh == 'Năm') {
+                    document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn ngày, tháng, năm sinh của bạn!';
+                } else {
+                    if (thangsinh == 'Tháng' && namsinh == 'Năm') {
+                        document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn tháng và năm sinh của bạn!';
+                    } else {
+                        if (ngaysinh == 'Ngày' && namsinh == 'Năm') {
+                            document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn ngày và năm sinh của bạn!';
+                        } else {
+                            if (ngaysinh == 'Ngày' && thangsinh == 'Tháng') {
+                                document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn ngày và tháng sinh của bạn!';
+                            } else {
+                                if (ngaysinh == 'Ngày') {
+                                    document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn ngày sinh của bạn!';
+
+                                } else {
+                                    if (thangsinh == 'Tháng') {
+                                        document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn tháng sinh của bạn!';
+
+                                    } else {
+                                        if (namsinh == 'Năm') {
+                                            document.getElementById('ntnsinh').innerHTML = 'Vui lòng chọn năm sinh của bạn!';
+
+                                        } else {
+                                            document.getElementById('ntnsinh').innerHTML = '';
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                this.ntnSinh = [ngaysinh, thangsinh, namsinh];
+                var lop = document.getElementById('Lop').value;
+                if (lop == 'Lớp') {
+                    document.getElementById('ycLop').innerHTML = 'Vui lòng chọn lớp của bạn';
+                } else {
+                    document.getElementById('ycLop').innerHTML = '';
+                }
+                var ycTen = document.getElementById('Name').value;
+                if (ycTen == '') {
+                    document.getElementById('ycTen').innerHTML = 'Vui lòng nhập họ tên của bạn!';
+                } else {
+                    document.getElementById('ycTen').innerHTML = '';
+                }
+                var ycGT = document.getElementById('Nam');
+                var ycGT1 = document.getElementById('Nữ');
+                if (ycGT.checked == false && ycGT1.checked == false) {
+                    document.getElementById('ycGT').innerHTML = 'Vui lòng chọn giới tính của bạn!';
+                } else {
+                    document.getElementById('ycGT').innerHTML = '';
+                }
+                var ycDC = document.getElementById('Add').value;
+                if (ycDC == '') {
+                    document.getElementById('ycDC').innerHTML = 'Vui lòng nhập địa chỉ của bạn!';
+                } else {
+                    document.getElementById('ycDC').innerHTML = '';
+                }
+                var ycEmail = document.getElementById('Mail').value;
+                console.log(ycEmail);
+                console.log(ycEmail.indexOf('@'));
+                if (ycEmail.indexOf('@') === -1) {
+                    document.getElementById('ycEmail').innerHTML = 'Email không đúng. Ví dụ abc@xyz';
+                    var flagEmail = false;
+
+                } else {
+                    document.getElementById('ycEmail').innerHTML = '';
+                    var flagEmail = true;
+                }
+                var ycDT = document.getElementById('DT').value;
+                if (ycDT.length != 10 && ycDT.length != 11) {
+                    document.getElementById('ycSDT').innerHTML = 'Vui lòng nhập đúng SĐT của bạn!';
+                    var flagDT = false;
+                } else {
+                    document.getElementById('ycSDT').innerHTML = '';
+                    var flagDT = true;
+                }
+                if (ycTen != '' && ycDC != '' && flagEmail == true && flagDT == true && ngaysinh != 'Ngày' && thangsinh != 'Tháng' && namsinh != 'Năm' && lop != 'Lớp') {
+                    if (ycGT.checked == true) {
+                        document.getElementById('kq').innerHTML = `<p>
+                                                                   Chúc mừng anh ${ycTen} đã đăng kí thành công khóa học của chúng tôi !!! <br>
+                                                                   THÔNG TIN HỌC VIÊN<br>
+                                                                   Họ và tên: <b>${ycTen}</b> <br>
+                                                                   Ngày sinh: ${this.ntnSinh.join('/')} <br>
+                                                                   Địa chỉ: ${ycDC} <br>
+                                                                   Lớp: ${lop} <br>
+                                                                   Email: ${ycEmail} <br>
+                                                                   Số điện thoại: ${ycDT}</p>`;
+                        this.ttHoc_vien = [`${ycTen}`, `${this.ntnSinh.join('/')}`, `${ycGT.value}`, `${ycDC}`, `${lop}`, `${ycEmail}`, `${ycDT}`];
+                        document.getElementById('ngay').value = 'Ngày';
+                        document.getElementById('thang').value = 'Tháng';
+                        document.getElementById('nam').value = 'Năm';
+                        document.getElementById('Lop').value = 'Lớp';
+                        document.getElementById('Name').value = '';
+                        document.getElementById('Nam').checked = false;
+                        document.getElementById('Nữ').checked = false;
+                        document.getElementById('Add').value = '';
+                        document.getElementById('Mail').value = '';
+                        document.getElementById('DT').value = '';
+                    }
+                    if (ycGT1.checked == true) {
+                        document.getElementById('kq').innerHTML = `<p>
+                                                                   Chúc mừng anh ${ycTen} đã đăng kí thành công khóa học của chúng tôi !!!<br>
+                                                                   THÔNG TIN HỌC VIÊN<br>
+                                                                   Họ và tên: <b>${ycTen}</b> <br>
+                                                                   Ngày sinh: ${this.ntnSinh.join('/')} <br>
+                                                                   Địa chỉ: ${ycDC} <br>
+                                                                   Lớp: ${lop} <br>
+                                                                   Email: ${ycEmail} <br>
+                                                                   Số điện thoại: ${ycDT}</p>`;
+                        this.ttHoc_vien = [`${ycTen}`, `${this.ntnSinh.join('/')}`, `${ycGT1.value}`, `${ycDC}`, `${lop}`, `${ycEmail}`, `${ycDT}`];
+                        document.getElementById('ngay').value = 'Ngày';
+                        document.getElementById('thang').value = 'Tháng';
+                        document.getElementById('nam').value = 'Năm';
+                        document.getElementById('Lop').value = 'Lớp';
+                        document.getElementById('Name').value = '';
+                        document.getElementById('Nam').checked = false;
+                        document.getElementById('Nữ').checked = false;
+                        document.getElementById('Add').value = '';
+                        document.getElementById('Mail').value = '';
+                        document.getElementById('DT').value = '';
+                    }
+                    this.danh_sach.push(this.ttHoc_vien);
+                    localStorage.setItem("key_data_arr", JSON.stringify(this.danh_sach));
+                }
+            }
+            dsDangKy() { 
+                    var tableHtml = '<table border="1" style="border-collapse: collapse; color: forestgreen" id="bangDS">' + `<tr><th colspan='10'>DANH SÁCH HỌC VIÊN ĐÃ ĐĂNG KÍ</th></tr>
+                    <tr>
+                        <td colspan = '10' style='text-align:right'>
+                            <input type='text' placeholder='Tìm kiếm tên học viên' id="timkiem">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mã HV</td>
+                        <td>Họ tên</td>
+                        <td>Ngày sinh</td>
+                        <td>Giới tính</td>
+                        <td>Địa chỉ</td>
+                        <td>Lớp</td>
+                        <td>Email</td>
+                        <td>Số ĐT</td>
+                        <td colspan='2'></td>
+                    </tr>`
+                    let get_data_arr = localStorage.getItem("key_data_arr");
+                    this.danh_sach = JSON.parse(get_data_arr);
+                    for (var x = 0; x < this.danh_sach.length; x++) {
+                        tableHtml += `<tr id='${x}'>`;
+                        tableHtml += `<td id='STT${x + 1}'>${x + 1}</td>`;
+                        for (var y = 0; y < 7; y++) {
+                            tableHtml += `<td>${this.danh_sach[x][y]}</td>`;
+                        }
+                        tableHtml += `
+                                  <td>
+                                    <input type="button" name="" id="sua" value="Sửa" class="btn btn-outline-warning btn-sm" onclick="dang_ky.nutSua(${x})">
+                                  </td>
+                                  <td>
+                                    <input type="button" name="" id="xoa" value="Xóa" class="btn btn-outline-danger btn-sm" onclick="dang_ky.nutXoa(${x})">
+                                  </td>
+                        </tr>`;
+                    }
+                    tableHtml += '</table>';
+                    document.getElementById('kq').innerHTML = tableHtml;
+                    if (this.danh_sach.length == 0) {
+                        document.getElementById('kq').innerHTML = `<h1><b style="color: red">Chưa có học viên nào đăng ký!!!</b></h1>`;
+                    }
+                    var tkHocVien = document.getElementById('timkiem');
+                    tkHocVien.addEventListener('keypress', function (e) {
+                        if (e.code == 'Enter') {
+                            if (tkHocVien.value != '') {
+                                dang_ky.timkiemHocVien(tkHocVien.value);
+                            } else {
+                                dang_ky.dsDangKy();
+                            }
+                        }
+                    })
+            }
+            nutXoa(id) {
+                if (confirm(`Bạn chắc chắn muốn xóa học viên ${this.danh_sach[id][0]} không???`) == true) {
+                    this.danh_sach.splice(id, 1);
+                    this.danh_sach = JSON.stringify(this.danh_sach);
+                    localStorage.setItem("key_data_arr", this.danh_sach);
+                    dang_ky.dsDangKy();
+
+                } else {
+                    return;
+                }
+                if (this.danh_sach.length == 0) {
+                    document.getElementById('kq').innerHTML = '';
+                }
+            }
+            nutSua(id) {
+                this.id = id;
+                this.ttHoc_vien = this.danh_sach[id];
+                if (this.ttHoc_vien[2] == 'Nam') {
+                    document.getElementById('Nam').checked = true;
+                } else {
+                    document.getElementById('Nữ').checked = true;
+                }
+                this.ntnSinh = this.ttHoc_vien[1].split('/');
+                document.getElementById('ngay').value = this.ntnSinh[0];
+                document.getElementById('thang').value = this.ntnSinh[1];
+                document.getElementById('nam').value = this.ntnSinh[2];
+                document.getElementById('Lop').value = this.ttHoc_vien[4];
+                document.getElementById('Name').value = this.ttHoc_vien[0];
+                document.getElementById('Add').value = this.ttHoc_vien[3];
+                document.getElementById('Mail').value = this.ttHoc_vien[5];
+                document.getElementById('DT').value = this.ttHoc_vien[6];
+                document.getElementById('cnhat').innerHTML = `<input type="button" name="" id="cap_nhat" value="Cập nhật" class="btn btn-success" onclick="dang_ky.nutCapnhat()">`;
+            }
+            nutCapnhat() {
+                this.danh_sach[this.id][0] = document.getElementById('Name').value;
+                this.ntnSinh[0] = document.getElementById('ngay').value;
+                this.ntnSinh[1] = document.getElementById('thang').value;
+                this.ntnSinh[2] = document.getElementById('nam').value;
+                this.danh_sach[this.id][1] = this.ntnSinh.join('/');
+                if (document.getElementById('Nam').checked == true) {
+                    this.danh_sach[this.id][2] = document.getElementById('Nam').value;
+                } else {
+                    if (document.getElementById('Nữ').checked == true) {
+                        this.danh_sach[this.id][2] = document.getElementById('Nữ').value;
+                    }
+                }
+                this.danh_sach[this.id][3] = document.getElementById('Add').value;
+                this.danh_sach[this.id][4] = document.getElementById('Lop').value;
+                this.danh_sach[this.id][5] = document.getElementById('Mail').value;
+                this.danh_sach[this.id][6] = document.getElementById('DT').value;
+                this.danh_sach = JSON.stringify(this.danh_sach);
+                localStorage.setItem("key_data_arr", this.danh_sach);
+                this.dsDangKy();
+                document.getElementById('ngay').value = 'Ngày';
+                document.getElementById('thang').value = 'Tháng';
+                document.getElementById('nam').value = 'Năm';
+                document.getElementById('Lop').value = 'Lớp';
+                document.getElementById('Name').value = '';
+                document.getElementById('Nam').checked = false;
+                document.getElementById('Nữ').checked = false;
+                document.getElementById('Add').value = '';
+                document.getElementById('Mail').value = '';
+                document.getElementById('DT').value = '';
+                document.getElementById('cnhat').innerHTML = `<input type="button" name="Dang_ki" id="Dang_ki" value="Đăng kí"
+                                                              onclick="dang_ky.nutDangKy();" class="btn btn-primary">
+                                                              <input type="reset" name="Nhap_lai" id="Nhap_lai" value="Nhập lại"
+                                                              class="btn btn-danger">`
+            }
+            timkiemHocVien(timkiem) {
+                let chi_so = 0;
+                for (var i = 0; i < this.danh_sach.length; i++) {
+                    if (this.danh_sach[i][0] == timkiem) {
+                        this.dsTimkiem.push(this.danh_sach[i]);
+                        chi_so = i;
+                    }
+                }
+                console.log(this.dsTimkiem);
+                var tableHtml = '<table border="1" style="border-collapse: collapse; color: forestgreen" id="bangDS">' + `<tr><th colspan='10'>DANH SÁCH HỌC VIÊN ĐÃ ĐĂNG KÍ</th></tr>;
+                    <tr>
+                        <td colspan = '10' style='text-align:right'>
+                            <input type='text' placeholder='Tìm kiếm tên học viên' id="timkiem">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mã HV</td>
+                        <td>Họ tên</td>
+                        <td>Ngày sinh</td>
+                        <td>Giới tính</td>
+                        <td>Địa chỉ</td>
+                        <td>Lớp</td>
+                        <td>Email</td>
+                        <td>Số Đt</td>
+                        <td colspan='2'></td>
+                    </tr>`;
+                for (var x = 0; x < this.dsTimkiem.length; x++) {
+                    tableHtml += `<tr id='${x}'>`;
+                    tableHtml += `<td id='STT${x + 1}'>${x + 1}</td>`;
+                    for (var y = 0; y < 7; y++) {
+                        tableHtml += `<td>${this.dsTimkiem[x][y]}</td>`;
+                    }
+                    tableHtml += `
+                                  <td>
+                                    <input type="button" name="" id="sua" value="Sửa" class="btn btn-outline-warning" onclick="dang_ky.nutSua(${chi_so})">
+                                  </td>
+                                  <td>
+                                    <input type="button" name="" id="xoa" value="Xóa" class="btn btn-outline-danger" onclick="dang_ky.nutXoa(${chi_so})">
+                                  </td>
+                        </tr>`;
+                }
+                tableHtml += '</table>';
+                document.getElementById('kq').innerHTML = tableHtml;
+                this.dsTimkiem = [];
+            }
+        }
+        ngay = new Ngay_Thang_Nam_Lop('ngay');
+        ngay.inNgay();
+        thang = new Ngay_Thang_Nam_Lop('thang');
+        thang.inThang();
+        nam = new Ngay_Thang_Nam_Lop('nam');
+        nam.inNam();
+        lop = new Ngay_Thang_Nam_Lop('Lop')
+        lop.inLop();
+        dang_ky = new Dang_Ky();
+    </script>
+</body>
+
+</html>
